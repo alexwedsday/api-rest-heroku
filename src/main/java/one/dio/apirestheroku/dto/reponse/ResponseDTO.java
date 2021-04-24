@@ -1,4 +1,4 @@
-package one.dio.apirestheroku.dto;
+package one.dio.apirestheroku.dto.reponse;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,7 +16,7 @@ public class ResponseDTO {
     private String message;
 
     public static class Builder {
-        private final Object data;
+        private Object data;
         private String message;
 
 
@@ -24,6 +24,7 @@ public class ResponseDTO {
         {
             this.data = data;
         }
+        public Builder(){}
         public Builder message(String message){
             this.message = message;
             return  this;
