@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -28,7 +29,11 @@ public class PersonService {
 
     public ResponseEntity<ResponseDTO> findAll() {
         List<Person> personList = repository.findAll();
-        return ResponseEntity.ok(new ResponseDTO.Builder(personList).build());
+        List<PersonDTO> personDTOList = personList
+                .stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new ResponseDTO.Builder(personDTOList).build());
     }
 
     public ResponseEntity<ResponseDTO> create(PersonDTO personDTO) {

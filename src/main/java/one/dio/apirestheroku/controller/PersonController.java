@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/person")
 public class PersonController {
@@ -22,7 +24,7 @@ public class PersonController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseDTO> createPerson(@RequestBody PersonDTO personDTO){
+    public ResponseEntity<ResponseDTO> createPerson(@RequestBody @Valid PersonDTO personDTO){
         return service.create(personDTO);
     }
 }
