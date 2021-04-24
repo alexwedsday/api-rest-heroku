@@ -2,6 +2,7 @@ package one.dio.apirestheroku.controller;
 
 import one.dio.apirestheroku.dto.reponse.ResponseDTO;
 import one.dio.apirestheroku.dto.request.PersonDTO;
+import one.dio.apirestheroku.exception.IdNotFoundException;
 import one.dio.apirestheroku.model.Person;
 import one.dio.apirestheroku.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class PersonController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDTO> findPerson(@PathVariable Long id){
         return service.findById(id);
+    }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseDTO> modifyPerson(@RequestBody @Valid PersonDTO personDTO) throws IdNotFoundException {
+        return service.updatePerson(personDTO);
     }
 
     @DeleteMapping("/{id}")

@@ -2,6 +2,7 @@ package one.dio.apirestheroku.service;
 
 import one.dio.apirestheroku.dto.reponse.ResponseDTO;
 import one.dio.apirestheroku.dto.request.PersonDTO;
+import one.dio.apirestheroku.exception.IdNotFoundException;
 import one.dio.apirestheroku.mapper.PersonMapper;
 import one.dio.apirestheroku.model.Person;
 import one.dio.apirestheroku.repository.PersonRepository;
@@ -58,8 +59,34 @@ public class PersonService {
         return response;
     }
 
+    public ResponseEntity<ResponseDTO> updatePerson(PersonDTO personDTO) throws IdNotFoundException {
+        Optional<Long> id = Optional.ofNullable(personDTO.getId());
+        id.orElseThrow(()-> new IdNotFoundException());
+        Optional<Person> personSaved = existPerson(id.get());
+        Person personUpdate;
+        ResponseEntity<ResponseDTO> response;
+
+        if(personSaved.isPresent()){
+            Person person = mapper.toModel(personDTO);
+            personUpdate = repository.save(person);
+            PersonDTO updateDTO = mapper.toDTO(personUpdate);
+            response = new ResponseEntity<ResponseDTO>(new ResponseDTO
+                    .Builder(updateDTO)
+                    .build(), HttpStatus.OK);
+        }else{
+            String message  = String.format("Person not found ID: %d", id.get());
+            LOGGER.info(message);
+            response = new ResponseEntity<ResponseDTO>(new ResponseDTO
+                    .Builder()
+                    .message(message)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+
+     return response;
+    }
+
     public ResponseEntity<ResponseDTO> findById(Long id){
-        Optional<Person> personOptional = repository.findById(id);
+        Optional<Person> personOptional = existPerson(id);
         ResponseEntity<ResponseDTO> response;
 
 
@@ -80,7 +107,7 @@ public class PersonService {
     }
 
     public ResponseEntity<ResponseDTO> removePerson(Long id) {
-        Optional<Person> person = repository.findById(id);
+        Optional<Person> person = existPerson(id);
         String message = "";
         ResponseEntity<ResponseDTO> response;
 
@@ -107,5 +134,7 @@ public class PersonService {
         return repository.findByCpf(person.getCpf());
     }
 
-
+    private Optional<Person> existPerson(Long id){
+        return repository.findById(id);
+    }
 }
