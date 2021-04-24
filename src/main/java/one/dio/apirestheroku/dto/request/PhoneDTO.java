@@ -25,7 +25,7 @@ public class PhoneDTO {
     /**
      * Similar to @Builder if using the lombok project.
      */
-    public class Builder(){
+    public class  Builder {
 
         Long id;
         PhoneType type;
@@ -33,7 +33,7 @@ public class PhoneDTO {
         String number;
 
 
-        public Builder() { }
+        public Builder(){ }
 
         public Builder id (Long id){
             this.id = id;

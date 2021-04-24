@@ -1,6 +1,7 @@
 package one.dio.apirestheroku.controller;
 
 import one.dio.apirestheroku.dto.reponse.ResponseDTO;
+import one.dio.apirestheroku.dto.request.PersonDTO;
 import one.dio.apirestheroku.model.Person;
 import one.dio.apirestheroku.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class PersonController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseDTO> createPerson(@RequestBody Person person){
-        return service.create(person);
+    public ResponseEntity<ResponseDTO> createPerson(@RequestBody PersonDTO personDTO){
+        return service.create(personDTO);
     }
 }

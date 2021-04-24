@@ -1,6 +1,8 @@
 package one.dio.apirestheroku.service;
 
 import one.dio.apirestheroku.dto.reponse.ResponseDTO;
+import one.dio.apirestheroku.dto.request.PersonDTO;
+import one.dio.apirestheroku.mapper.PersonMapper;
 import one.dio.apirestheroku.model.Person;
 import one.dio.apirestheroku.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -19,6 +21,8 @@ public class PersonService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
 
+    private final PersonMapper mapper = PersonMapper.INSTANCE;
+
     @Autowired
     private PersonRepository repository;
 
@@ -27,7 +31,8 @@ public class PersonService {
         return ResponseEntity.ok(new ResponseDTO.Builder(personList).build());
     }
 
-    public ResponseEntity<ResponseDTO> create(Person person) {
+    public ResponseEntity<ResponseDTO> create(PersonDTO personDTO) {
+        Person person = mapper.toModel(personDTO);
         Optional<Person> personSaved = existPerson(person);
         ResponseEntity<ResponseDTO> response;
         if (personSaved.isPresent()) {
