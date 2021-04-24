@@ -1,6 +1,6 @@
 package one.dio.apirestheroku.service;
 
-import one.dio.apirestheroku.dto.ResponseDTO;
+import one.dio.apirestheroku.dto.reponse.ResponseDTO;
 import one.dio.apirestheroku.model.Person;
 import one.dio.apirestheroku.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

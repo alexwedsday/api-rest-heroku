@@ -1,4 +1,4 @@
-package one.dio.apirestheroku.dto;
+package one.dio.apirestheroku.dto.reponse;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;

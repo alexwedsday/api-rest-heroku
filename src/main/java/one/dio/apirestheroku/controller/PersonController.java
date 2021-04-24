@@ -1,6 +1,6 @@
 package one.dio.apirestheroku.controller;
 
-import one.dio.apirestheroku.dto.ResponseDTO;
+import one.dio.apirestheroku.dto.reponse.ResponseDTO;
 import one.dio.apirestheroku.model.Person;
 import one.dio.apirestheroku.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
