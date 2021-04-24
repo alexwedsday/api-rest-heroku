@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,6 +56,27 @@ public class PersonService {
 
 
         return response;
+    }
+
+    public ResponseEntity<ResponseDTO> findById(Long id){
+        Optional<Person> personOptional = repository.findById(id);
+        ResponseEntity<ResponseDTO> response;
+
+
+        if(personOptional.isPresent()){
+            PersonDTO personDTO = mapper.toDTO(personOptional.get());
+            response = new ResponseEntity<ResponseDTO>(new ResponseDTO
+                    .Builder(personOptional.get())
+                    .build(), HttpStatus.OK);
+        }else{
+            String message = String.format("Person not found by ID: %d", id);
+            LOGGER.info(message);
+            response = new ResponseEntity<ResponseDTO>(new ResponseDTO
+                    .Builder()
+                    .message(message)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+      return  response;
     }
 
     private Optional<Person> existPerson(Person person) {

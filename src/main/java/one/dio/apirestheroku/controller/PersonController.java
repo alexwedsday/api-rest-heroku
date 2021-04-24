@@ -27,4 +27,9 @@ public class PersonController {
     public ResponseEntity<ResponseDTO> createPerson(@RequestBody @Valid PersonDTO personDTO){
         return service.create(personDTO);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseDTO> findPerson(@PathVariable Long id){
+        return service.findById(id);
+    }
 }
