@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/api/v1/person")
@@ -31,5 +32,10 @@ public class PersonController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDTO> findPerson(@PathVariable Long id){
         return service.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDTO> removePerson(@PathVariable Long id){
+        return service.removePerson(id);
     }
 }

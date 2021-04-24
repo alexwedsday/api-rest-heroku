@@ -32,7 +32,9 @@ public class PersonService {
                 .stream()
                 .map(mapper::toDTO)
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(new ResponseDTO.Builder(personDTOList).build());
+        return ResponseEntity.ok(new ResponseDTO
+                .Builder(personDTOList)
+                .build());
     }
 
     public ResponseEntity<ResponseDTO> create(PersonDTO personDTO) {
@@ -46,8 +48,6 @@ public class PersonService {
                     .Builder(personSaved.get())
                     .message(message)
                     .build(), HttpStatus.OK);
-
-
         } else {
             response = new ResponseEntity<ResponseDTO>(new ResponseDTO
                     .Builder(repository.save(person))
@@ -67,7 +67,7 @@ public class PersonService {
             PersonDTO personDTO = mapper.toDTO(personOptional.get());
             response = new ResponseEntity<ResponseDTO>(new ResponseDTO
                     .Builder(personOptional.get())
-                    .build(), HttpStatus.OK);
+                    .build(), HttpStatus.FOUND);
         }else{
             String message = String.format("Person not found by ID: %d", id);
             LOGGER.info(message);
@@ -79,7 +79,33 @@ public class PersonService {
       return  response;
     }
 
+    public ResponseEntity<ResponseDTO> removePerson(Long id) {
+        Optional<Person> person = repository.findById(id);
+        String message = "";
+        ResponseEntity<ResponseDTO> response;
+
+        if(person.isPresent())
+        {
+            message = String.format("Delete Person ID: %d", id);
+            repository.deleteById(id);
+            response = new ResponseEntity<ResponseDTO>(new ResponseDTO
+                    .Builder()
+                    .message(message)
+                    .build(), HttpStatus.FOUND);
+        }else{
+            message = String.format("Person not found by ID: %d", id);
+            LOGGER.info(message);
+            response = new ResponseEntity<ResponseDTO>(new ResponseDTO
+                    .Builder()
+                    .message(message)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+        return response;
+    }
+
     private Optional<Person> existPerson(Person person) {
         return repository.findByCpf(person.getCpf());
     }
+
+
 }
