@@ -32,6 +32,61 @@ public class Person {
     public Person() {
     }
 
+
+    public Person(Builder builder){
+
+        this.id = builder.id;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.cpf = builder.cpf;
+        this.birthDate = builder.birthDate;
+        this.phones = builder.phones;
+
+    }
+    /**
+     * Similar to @Builder if using the lombok project.
+     */
+    public static class Builder {
+        private Long id;
+        private String firstName;
+        private String lastName;
+        private String cpf;
+        private LocalDate birthDate;
+        private List<Phone> phones;
+
+        public Builder(){}
+
+        public Builder id(Long id){
+            this.id = id;
+            return this;
+        }
+        public Builder firstName(String firstName){
+            this.firstName = firstName;
+            return  this;
+        }
+        public Builder lastName(String lastName){
+            this.lastName = lastName;
+            return  this;
+        }
+        public Builder cpf(String cpf){
+            this.cpf = cpf;
+            return this;
+        }
+        public Builder birthDate(LocalDate birthDate){
+            this.birthDate = birthDate;
+            return this;
+        }
+
+        public Builder phones(List<Phone> phones){
+            this.phones = phones;
+            return  this;
+        }
+
+        public Person build(){
+            return new Person(this);
+        }
+    }
+
     public Long getId() {
         return id;
     }

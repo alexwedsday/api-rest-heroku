@@ -2,9 +2,10 @@ package one.dio.apirestheroku.dto.reponse;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.time.LocalDateTime;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 public class ResponseDTO {

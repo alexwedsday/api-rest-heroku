@@ -24,6 +24,57 @@ public class Phone {
     public Phone() {
     }
 
+    /**
+     * Similar to @Builder if using the lombok project.
+     */
+    public static class Builder{
+        private Long id;
+        private PhoneType type;
+        private String ddd;
+        private String number;
+        public Builder(){}
+
+        public Builder id(Long id){
+            this.id = id;
+            return this;
+        }
+        public Builder type(PhoneType type){
+            this.type = type;
+            return this;
+        }
+
+        public Builder ddd(String ddd){
+            this.ddd = ddd;
+            return this;
+        }
+
+        public Builder number(String number){
+            this.number = number;
+            return this;
+        }
+
+        public Phone build()
+        {
+            return new Phone(this);
+        }
+
+    }
+
+    public Phone(Long id, PhoneType type, String ddd, String number) {
+        this.id = id;
+        this.type = type;
+        this.ddd = ddd;
+        this.number = number;
+    }
+
+    public Phone(Builder builder){
+        this.id = builder.id;
+        this.type = builder.type;
+        this.ddd = builder.ddd;
+        this.number = builder.number;
+
+    }
+
     public Long getId() {
         return id;
     }

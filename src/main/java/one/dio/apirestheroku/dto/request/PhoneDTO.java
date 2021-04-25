@@ -25,7 +25,7 @@ public class PhoneDTO {
     /**
      * Similar to @Builder if using the lombok project.
      */
-    public class  Builder {
+    public static class  Builder {
 
         Long id;
         PhoneType type;

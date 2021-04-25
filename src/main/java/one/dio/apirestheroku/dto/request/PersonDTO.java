@@ -30,8 +30,10 @@ public class PersonDTO {
     @NotEmpty
     private List<PhoneDTO> phones;
 
-
-    public class Builder{
+    /**
+     * Similar to @Builder if using the lombok project.
+     */
+    public static class Builder{
         Long id;
         String firstName;
         String lastName;
