@@ -15,11 +15,10 @@ public class PersonUtil {
     private static final String LAST_NAME  = "Doe";
     private static final String CPF = "14512243038";
     private static final Long PERSON_ID = 1L;
-    private static final LocalDate BIRTH_DATE = LocalDate.of(2009, 15, 2);
+    private static final LocalDate BIRTH_DATE = LocalDate.of(2009, 12, 2);
 
-    public static ResponseEntity<ResponseDTO> createFakeDTO(){
-        return new ResponseEntity<ResponseDTO>(new ResponseDTO
-                .Builder( new PersonDTO
+    public static PersonDTO createFakeDTO(){
+        return  new PersonDTO
                 .Builder()
                 .id(PERSON_ID)
                 .firstName(FIRST_NAME)
@@ -27,9 +26,7 @@ public class PersonUtil {
                 .cpf(CPF)
                 .birthDate(BIRTH_DATE)
                 .phones(Collections.singletonList(PhoneUtil.createFakeDTO()))
-                .build())
-                .build()
-                , HttpStatus.CREATED);
+                .build();
     }
     public static Person createFakeEntity(){
         return new Person

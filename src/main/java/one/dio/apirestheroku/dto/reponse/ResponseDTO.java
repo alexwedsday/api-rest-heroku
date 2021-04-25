@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -51,5 +52,18 @@ public class ResponseDTO {
 
     public LocalDateTime getTime() {
         return time;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ResponseDTO)) return false;
+        ResponseDTO that = (ResponseDTO) o;
+        return Objects.equals(data, that.data) && Objects.equals(time, that.time) && Objects.equals(message, that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data, time, message);
     }
 }

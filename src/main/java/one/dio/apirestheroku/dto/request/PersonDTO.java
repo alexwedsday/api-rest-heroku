@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class PersonDTO {
 
@@ -148,5 +149,18 @@ public class PersonDTO {
 
     public void setPhones(List<PhoneDTO> phones) {
         this.phones = phones;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PersonDTO)) return false;
+        PersonDTO personDTO = (PersonDTO) o;
+        return Objects.equals(id, personDTO.id) && Objects.equals(firstName, personDTO.firstName) && Objects.equals(lastName, personDTO.lastName) && Objects.equals(cpf, personDTO.cpf) && Objects.equals(birthDate, personDTO.birthDate) && Objects.equals(phones, personDTO.phones);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, cpf, birthDate, phones);
     }
 }
