@@ -94,7 +94,7 @@ public class PersonService {
             PersonDTO personDTO = mapper.toDTO(personOptional.get());
             response = new ResponseEntity<ResponseDTO>(new ResponseDTO
                     .Builder(personOptional.get())
-                    .build(), HttpStatus.FOUND);
+                    .build(), HttpStatus.OK);
         }else{
             String message = String.format("Person not found by ID: %d", id);
             LOGGER.info(message);
@@ -118,7 +118,7 @@ public class PersonService {
             response = new ResponseEntity<ResponseDTO>(new ResponseDTO
                     .Builder()
                     .message(message)
-                    .build(), HttpStatus.FOUND);
+                    .build(), HttpStatus.NOT_FOUND);
         }else{
             message = String.format("Person not found by ID: %d", id);
             LOGGER.info(message);
