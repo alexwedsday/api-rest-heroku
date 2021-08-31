@@ -15,8 +15,6 @@
 
 Para executar o projeto, digite o comando abaixo no terminal/cmd:
 
-
-
 ```
 mvn spring-boot:run 
 ```
@@ -25,19 +23,37 @@ mvn spring-boot:run
 
 Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
 
-
-
 ```
 http://localhost:8080/api/v1/people
 ```
 
+  
+
+Para testar os endpoints utilize o swagger:
+
+```
+ http://localhost:8080/swagger-ui.html
+```
 
 
-Link para teste no Heroku
+
+Links para teste no Heroku:
 
 ```
 https://manager-people.herokuapp.com/api/v1/person
 ```
+
+```
+https://manager-people.herokuapp.com/swagger-ui.html
+```
+
+
+
+**Observações:**
+
+Para fazer um post utilize um gerador de CPF, neste estudo testei a annotations **@Cpf** , link do gerador de cpf nas referências.
+
+
 
 **Requisitos necessários:**
 
@@ -54,6 +70,8 @@ Para referências futuras, veja essa seção:
 * [Spring Boot Maven Guia de Referência do Plugin](https://docs.spring.io/spring-boot/docs/2.4.3/maven-plugin/reference/html/)
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.4.3/reference/htmlsingle/#boot-features-developing-web-applications)
 * [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.4.3/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+* [Springdoc OpenApi](https://springdoc.org/)
+* [Gerador Cpf]([Gerador de CPF - 4Devs](https://www.4devs.com.br/gerador_de_cpf))
 
 
 
